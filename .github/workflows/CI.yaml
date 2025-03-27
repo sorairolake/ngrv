@@ -1,0 +1,134 @@
+# SPDX-FileCopyrightText: 2025 Shun Sakai
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "develop"
+      - "master"
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  check:
+    name: Check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os-alias:
+          - ubuntu
+          - macos
+          - windows
+        toolchain-alias:
+          - msrv
+          - stable
+        include:
+          - os-alias: ubuntu
+            os: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - os-alias: macos
+            os: macos-14
+            target: aarch64-apple-darwin
+          - os-alias: windows
+            os: windows-2022
+            target: x86_64-pc-windows-msvc
+          - toolchain-alias: msrv
+            toolchain: 1.85.0
+          - toolchain-alias: stable
+            toolchain: stable
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          targets: ${{ matrix.target }}
+      - name: Cache build artifacts
+        uses: Swatinem/rust-cache@v2.7.8
+        with:
+          key: ${{ matrix.target }}
+      - name: Check a package
+        run: cargo check --target ${{ matrix.target }}
+
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os-alias:
+          - ubuntu
+          - macos
+          - windows
+        toolchain-alias:
+          - msrv
+          - stable
+        include:
+          - os-alias: ubuntu
+            os: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - os-alias: macos
+            os: macos-14
+            target: aarch64-apple-darwin
+          - os-alias: windows
+            os: windows-2022
+            target: x86_64-pc-windows-msvc
+          - toolchain-alias: msrv
+            toolchain: 1.85.0
+          - toolchain-alias: stable
+            toolchain: stable
+    steps:
+      - name: Set Git to use LF
+        if: matrix.os == 'windows-2022'
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          targets: ${{ matrix.target }}
+      - name: Cache build artifacts
+        uses: Swatinem/rust-cache@v2.7.8
+        with:
+          key: ${{ matrix.target }}
+      - name: Run tests
+        run: cargo test --target ${{ matrix.target }}
+
+  rustfmt:
+    name: Rustfmt
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+      - name: Cache build artifacts
+        uses: Swatinem/rust-cache@v2.7.8
+      - name: Check code formatted
+        run: cargo fmt -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+      - name: Cache build artifacts
+        uses: Swatinem/rust-cache@v2.7.8
+      - name: Check no lint warnings
+        run: cargo clippy -- -D warnings

@@ -1,0 +1,195 @@
+// SPDX-FileCopyrightText: 2025 Shun Sakai
+//
+// SPDX-License-Identifier: CC-BY-4.0
+
+= ngrv(1)
+// Specify in UTC.
+:docdate: 2025-03-27
+:revnumber: 0.1.0
+:doctype: manpage
+:mansource: ngrv {revnumber}
+:manmanual: General Commands Manual
+:rust-official-url: https://www.rust-lang.org/
+:enwp-article-url: https://en.wikipedia.org/wiki
+:binary-prefix-url: {enwp-article-url}/Binary_prefix
+:metric-prefix-url: {enwp-article-url}/Metric_prefix
+:parsing-a-span-url: https://docs.rs/jiff/#parsing-a-span
+:io-module-url: https://doc.rust-lang.org/std/io
+:buf-reader-new-url: {io-module-url}/struct.BufReader.html#method.new
+:buf-writer-new-url: {io-module-url}/struct.BufWriter.html#method.new
+:sysexits-man-page-url: https://man.openbsd.org/sysexits
+:repo-url: https://github.com/sorairolake/ngrv
+
+== NAME
+
+ngrv - monitor the progress of data through a pipe
+
+== SYNOPSIS
+
+*{manname}* [_OPTION_]... [_FILE_]...
+
+== DESCRIPTION
+
+*{manname}* is a terminal-based tool for monitoring the progress of data
+through a pipeline written in {rust-official-url}[Rust]. It is inspired by
+*pv*(1) and can be used for similar purposes, but is not intended as a drop-in
+replacement for it.
+
+== POSITIONAL ARGUMENTS
+
+_FILE_::
+
+  Files to concatenate. If _FILE_ is not specified, or if "-" is specified,
+  data will be read from standard input.
+
+== OPTIONS
+
+*--no-progress*::
+
+  Hide the progress bar. If any inputs are not files, or are unreadable, and no
+  size was explicitly given with *--size*, the progress bar cannot indicate how
+  close to completion the transfer is, so it will not be shown even if this
+  option is not specified.
+
+*--no-timer*::
+
+  Hide the elapsed time.
+
+*--no-eta*::
+
+  Hide the remaining time. This will estimate, based on current transfer rates
+  and the total data size, how long it will be before completion. The remaining
+  time is prefixed with "ETA". If the total data size cannot be determined, the
+  remaining time will not be shown even if this option is not specified.
+
+*--no-rate*::
+
+  Hide the speed of data transfer. If this option is not specified, The rate
+  will be shown in square brackets "[]".
+
+*--no-bytes*::
+
+  Hide the total amount of data transferred.
+
+*-k*, *--si*::
+
+  Use {binary-prefix-url}[binary prefixes] rather than
+  {metric-prefix-url}[SI prefixes] for the amount of data displayed in the
+  progress.
+
+*-s*, *--size* _SIZE_::
+
+  Set estimated data size to _SIZE_ bytes. _SIZE_ can be suffixed with a symbol
+  (B), which represents the byte. B can be prefixed with SI prefixes or binary
+  prefixes.
+
+*-i*, *--interval* _SEC_::
+
+  Wait _SEC_ seconds between updates. For the interval which can be provided
+  for _SEC_, see {parsing-a-span-url}.
+
+*-N*, *--name* _NAME_::
+
+  Prefix the output information with _NAME_.
+
+*-B*, *--buffer-size* _BYTES_::
+
+  Use a transfer buffer size of _BYTES_ bytes. The same suffixes as *--size*
+  can be used. The default buffer size is based on
+  {buf-reader-new-url}[`BufReader::new`] and
+  {buf-writer-new-url}[`BufWriter::new`] methods.
+
+*-h*, *--help*::
+
+  Print help message. The short flag (*-h*) will print a condensed help message
+  while the long flag (*--help*) will print a detailed help message.
+
+*-V*, *--version*::
+
+  Print version number. The long flag (*--version*) will also print the
+  copyright notice, the license notice and where to report bugs.
+
+*--generate-completion* _SHELL_::
+
+  Generate shell completion. The completion is output to standard output.
+
+  The possible values are:{blank}:::
+
+    *bash*::::
+
+      Bash.
+
+    *elvish*::::
+
+      Elvish.
+
+    *fish*::::
+
+      fish.
+
+    *nushell*::::
+
+      Nushell.
+
+    *powershell*::::
+
+      PowerShell.
+
+    *zsh*::::
+
+      Zsh.
+
+== EXIT STATUS
+
+*0*::
+
+  Successful program execution.
+
+*1*::
+
+  An error occurred.
+
+*2*::
+
+  An error occurred while parsing command-line arguments.
+
+Exit statuses other than these are defined by
+{sysexits-man-page-url}[`<sysexits.h>`].
+
+== NOTES
+
+Source repository:{blank}::
+
+  {repo-url}
+
+== EXAMPLES
+
+To watch the progress of compressing a `.gz` file:{blank}::
+
+  $ *ngrv archive.tar | gzip > archive.tar.gz*
+
+A similar example that read a `.tar` archive from standard input:{blank}::
+
+  $ *cat archive.tar | ngrv -s 4GiB | gzip > archive.tar.gz*
+
+== REPORTING BUGS
+
+Report bugs to:{blank}::
+
+  {repo-url}/issues
+
+== COPYRIGHT
+
+Copyright (C) 2025 Shun Sakai
+
+. This program is distributed under the terms of the GNU General Public License
+  v3.0 or later.
+. This manual page is distributed under the terms of the Creative Commons
+  Attribution 4.0 International Public License.
+
+This is free software: you are free to change and redistribute it. There is NO
+WARRANTY, to the extent permitted by law.
+
+== SEE ALSO
+
+*cat*(1), *pv*(1)

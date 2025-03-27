@@ -12,7 +12,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 ![License][license-badge]
 
 **ngrv** (*n*a*g*a*r*e *v*iewer, 流れビューアー) is a terminal-based tool for
-monitoring the progress of data through a pipeline, similar to [`pv(1)`].
+monitoring the progress of data through a pipeline written in [Rust]. It is
+inspired by [`pv(1)`] and can be used for similar purposes, but is not intended
+as a drop-in replacement for it.
 
 ## Installation
 
@@ -34,16 +36,16 @@ Please see [BUILD.adoc].
 
 ### Basic usage
 
-To watch the progress of compressing a `.zst` file:
+To watch the progress of compressing a `.gz` file:
 
 ```sh
-ngrv archive.tar | zstd > archive.tar.zst
+ngrv archive.tar | gzip > archive.tar.gz
 ```
 
 A similar example that read a `.tar` archive from standard input:
 
 ```sh
-cat archive.tar | ngrv -s 4GiB | zstd > archive.tar.zst
+cat archive.tar | ngrv -s 4GiB | gzip > archive.tar.gz
 ```
 
 > [!TIP]
@@ -111,6 +113,7 @@ licensing information.
 [version-url]: https://crates.io/crates/ngrv
 [msrv-badge]: https://img.shields.io/crates/msrv/ngrv?style=for-the-badge&logo=rust
 [license-badge]: https://img.shields.io/crates/l/ngrv?style=for-the-badge
+[Rust]: https://www.rust-lang.org/
 [`pv(1)`]: https://www.ivarch.com/programs/quickref/pv.shtml
 [release page]: https://github.com/sorairolake/ngrv/releases
 [BUILD.adoc]: BUILD.adoc

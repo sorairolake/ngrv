@@ -16,6 +16,8 @@ monitoring the progress of data through a pipeline written in [Rust]. It is
 inspired by [`pv(1)`] and can be used for similar purposes, but is not intended
 as a drop-in replacement for it.
 
+![Demo animation](assets/demo.gif)
+
 ## Installation
 
 ### From source

@@ -19,7 +19,7 @@ instructions:
     command: file linux-6.14.tar*
   - !Wait 1s
   - !Command
-    command: dua linux-6.14.tar*
+    command: dua -A linux-6.14.tar*
   - !Wait 3s
   - !Clear
 
@@ -31,7 +31,7 @@ instructions:
     command: file git-2.49.0.tar*
   - !Wait 1s
   - !Command
-    command: dua git-2.49.0.tar*
+    command: dua -A git-2.49.0.tar*
   - !Wait 3s
   - !Clear
 

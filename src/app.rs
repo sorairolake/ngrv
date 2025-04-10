@@ -98,15 +98,20 @@ pub fn run() -> anyhow::Result<()> {
         let template = keys.join(" ");
 
         let style = ProgressStyle::with_template(&template)?;
-        let pb = ProgressBar::new(total_size)
-            .with_style(style)
-            .with_finish(ProgressFinish::AndLeave);
-        if let Some(interval) = interval {
-            pb.enable_steady_tick(interval);
-        }
-        if let Some(name) = opt.name {
-            pb.set_prefix(name);
-        }
+        let pb = if opt.quiet {
+            ProgressBar::hidden()
+        } else {
+            let pb = ProgressBar::new(total_size)
+                .with_style(style)
+                .with_finish(ProgressFinish::AndLeave);
+            if let Some(interval) = interval {
+                pb.enable_steady_tick(interval);
+            }
+            if let Some(name) = opt.name {
+                pb.set_prefix(name);
+            }
+            pb
+        };
         let mut writer = pb.wrap_write(writer);
 
         for file in files {
@@ -129,16 +134,21 @@ pub fn run() -> anyhow::Result<()> {
         let template = keys.join(" ");
 
         let style = ProgressStyle::with_template(&template)?;
-        let pb = size
-            .map_or_else(ProgressBar::no_length, ProgressBar::new)
-            .with_style(style)
-            .with_finish(ProgressFinish::AndLeave);
-        if let Some(interval) = interval {
-            pb.enable_steady_tick(interval);
-        }
-        if let Some(name) = opt.name {
-            pb.set_prefix(name);
-        }
+        let pb = if opt.quiet {
+            ProgressBar::hidden()
+        } else {
+            let pb = size
+                .map_or_else(ProgressBar::no_length, ProgressBar::new)
+                .with_style(style)
+                .with_finish(ProgressFinish::AndLeave);
+            if let Some(interval) = interval {
+                pb.enable_steady_tick(interval);
+            }
+            if let Some(name) = opt.name {
+                pb.set_prefix(name);
+            }
+            pb
+        };
         let mut writer = pb.wrap_write(writer);
 
         let stdin = io::stdin().lock();

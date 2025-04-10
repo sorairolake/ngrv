@@ -71,6 +71,21 @@ pub struct Opt {
     #[arg(long)]
     pub no_bytes: bool,
 
+    /// Don't output any transfer information at all.
+    #[arg(
+        short,
+        long,
+        conflicts_with("no_progress"),
+        conflicts_with("no_timer"),
+        conflicts_with("no_eta"),
+        conflicts_with("no_rate"),
+        conflicts_with("no_bytes"),
+        conflicts_with("size"),
+        conflicts_with("interval"),
+        conflicts_with("name")
+    )]
+    pub quiet: bool,
+
     /// Use binary prefixes rather than SI prefixes for the amount of data
     /// displayed in the progress.
     #[arg(short('k'), long)]

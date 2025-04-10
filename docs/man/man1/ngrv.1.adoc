@@ -4,7 +4,7 @@
 
 = ngrv(1)
 // Specify in UTC.
-:docdate: 2025-03-27
+:docdate: 2025-04-10
 :revnumber: 0.1.0
 :doctype: manpage
 :mansource: ngrv {revnumber}
@@ -70,6 +70,10 @@ _FILE_::
 *--no-bytes*::
 
   Hide the total amount of data transferred.
+
+*-q*, *--quiet*::
+
+  Don't output any transfer information at all.
 
 *-k*, *--si*::
 

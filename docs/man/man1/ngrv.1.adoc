@@ -10,11 +10,16 @@
 :mansource: ngrv {revnumber}
 :manmanual: General Commands Manual
 :rust-official-url: https://www.rust-lang.org/
-:indicatif-templates-url: https://docs.rs/indicatif/#templates
+:indicatif-docs-url: https://docs.rs/indicatif
+:indicatif-templates-url: {indicatif-docs-url}/#templates
 :enwp-article-url: https://en.wikipedia.org/wiki
 :binary-prefix-url: {enwp-article-url}/Binary_prefix
 :metric-prefix-url: {enwp-article-url}/Metric_prefix
 :jiff-parsing-a-span-url: https://docs.rs/jiff/#parsing-a-span
+:indicatif-progress-style-url: {indicatif-docs-url}/latest/indicatif/style/struct.ProgressStyle.html
+:indicatif-progress-chars-url: {indicatif-progress-style-url}#method.progress_chars
+:indicatif-tick-chars-url: {indicatif-progress-style-url}#method.tick_chars
+:indicatif-tick-strings-url: {indicatif-progress-style-url}#method.tick_strings
 :io-module-url: https://doc.rust-lang.org/std/io
 :buf-reader-new-url: {io-module-url}/struct.BufReader.html#method.new
 :buf-writer-new-url: {io-module-url}/struct.BufWriter.html#method.new
@@ -105,6 +110,20 @@ _FILE_::
 *-N*, *--name* _NAME_::
 
   Prefix the output information with _NAME_.
+
+*-u*, *--bar-style* _STRING_::
+
+  Set the progress characters to _STRING_. See
+  {indicatif-progress-chars-url}[`ProgressStyle::progress_chars`] for more
+  details.
+
+*--spinner-style* _STRING_...::
+
+  Set the tick character sequence or the tick string sequence for the spinner
+  to _STRING_. If this option takes multiple _STRING_, it sets the tick string
+  sequence, otherwise it sets the tick character sequence. See
+  {indicatif-tick-chars-url}[`ProgressStyle::tick_chars`] and
+  {indicatif-tick-strings-url}[`ProgressStyle::tick_strings`] for more details.
 
 *-B*, *--buffer-size* _BYTES_::
 

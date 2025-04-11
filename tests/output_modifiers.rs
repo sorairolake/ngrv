@@ -142,3 +142,54 @@ fn name() {
         .success()
         .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
 }
+
+#[test]
+fn bar_style() {
+    utils::command::command()
+        .arg("-u")
+        .arg("#>-")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .success()
+        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+}
+
+#[test]
+fn spinner_style() {
+    utils::command::command()
+        .arg("--spinner-style")
+        .arg(r"/|\- ")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .success()
+        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+    utils::command::command()
+        .arg("--spinner-style")
+        .arg("▹▹▹▹▹")
+        .arg("▸▹▹▹▹")
+        .arg("▹▸▹▹▹")
+        .arg("▹▹▸▹▹")
+        .arg("▹▹▹▸▹")
+        .arg("▹▹▹▹▸")
+        .arg("▪▪▪▪▪")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .success()
+        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+}
+
+#[test]
+fn spinner_style_without_value() {
+    utils::command::command()
+        .arg("--spinner-style")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "a value is required for '--spinner-style <STRING>...' but none was supplied",
+        ));
+}

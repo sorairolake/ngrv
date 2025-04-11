@@ -22,6 +22,8 @@ project adheres to https://semver.org/[Semantic Versioning].
 * Add `--quiet` option ({pull-request-url}/11[#11])
 * Add `--format` option ({pull-request-url}/12[#12])
 * Add `--no-spinner` option ({pull-request-url}/14[#14])
+* Add `--bar-style` option ({pull-request-url}/15[#15])
+* Add `--spinner-style` option ({pull-request-url}/15[#15])
 
 == {project-url}/releases/tag/v0.1.0[0.1.0] - 2025-03-27
 

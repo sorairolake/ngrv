@@ -15,7 +15,7 @@ use indicatif::{ProgressBar, ProgressFinish, ProgressStyle};
 use crate::cli::Opt;
 
 /// Runs the program and returns the result.
-#[allow(clippy::too_many_lines)]
+#[allow(clippy::cognitive_complexity, clippy::too_many_lines)]
 pub fn run() -> anyhow::Result<()> {
     let opt = Opt::parse();
 
@@ -99,8 +99,19 @@ pub fn run() -> anyhow::Result<()> {
         }
         let template = opt.format.unwrap_or_else(|| keys.join(" "));
 
-        let style = ProgressStyle::with_template(&template)
+        let mut style = ProgressStyle::with_template(&template)
             .context("could not set the template string for the progress bar")?;
+        if let Some(string) = opt.bar_style {
+            style = style.progress_chars(&string);
+        }
+        if let Some(strings) = opt.spinner_style {
+            let strings: Vec<_> = strings.iter().map(String::as_str).collect();
+            style = if let [string] = strings.as_slice() {
+                style.tick_chars(string)
+            } else {
+                style.tick_strings(&strings)
+            };
+        }
         let pb = if opt.quiet {
             ProgressBar::hidden()
         } else {
@@ -136,8 +147,19 @@ pub fn run() -> anyhow::Result<()> {
         }
         let template = opt.format.unwrap_or_else(|| keys.join(" "));
 
-        let style = ProgressStyle::with_template(&template)
+        let mut style = ProgressStyle::with_template(&template)
             .context("could not set the template string for the progress bar")?;
+        if let Some(string) = opt.bar_style {
+            style = style.progress_chars(&string);
+        }
+        if let Some(strings) = opt.spinner_style {
+            let strings: Vec<_> = strings.iter().map(String::as_str).collect();
+            style = if let [string] = strings.as_slice() {
+                style.tick_chars(string)
+            } else {
+                style.tick_strings(&strings)
+            };
+        }
         let pb = if opt.quiet {
             ProgressBar::hidden()
         } else {

@@ -39,6 +39,17 @@ fn no_progress_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-progress' cannot be used with '--quiet'",
         ));
+    utils::command::command()
+        .arg("--no-progress")
+        .arg("-u")
+        .arg("#>-")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--no-progress' cannot be used with '--bar-style <STRING>'",
+        ));
 }
 
 #[test]
@@ -214,6 +225,36 @@ fn no_spinner_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-spinner' cannot be used with '--quiet'",
         ));
+    utils::command::command()
+        .arg("--no-spinner")
+        .arg("--spinner-style")
+        .arg(r"/|\- ")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--no-spinner' cannot be used with '--spinner-style <STRING>...'",
+        ));
+    utils::command::command()
+        .arg("--no-spinner")
+        .arg("--spinner-style")
+        .arg("▹▹▹▹▹")
+        .arg("▸▹▹▹▹")
+        .arg("▹▸▹▹▹")
+        .arg("▹▹▸▹▹")
+        .arg("▹▹▹▸▹")
+        .arg("▹▹▹▹▸")
+        .arg("▪▪▪▪▪")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--no-spinner' cannot be used with '--spinner-style <STRING>...'",
+        ));
 }
 
 #[test]
@@ -250,18 +291,6 @@ fn format_conflicts_with() {
         .code(2)
         .stderr(predicate::str::contains(
             "the argument '--format <FORMAT>' cannot be used with '--si'",
-        ));
-    utils::command::command()
-        .arg("-F")
-        .arg("{wide_bar}")
-        .arg("-N")
-        .arg("foo")
-        .arg("assets/after-long-help.md")
-        .assert()
-        .failure()
-        .code(2)
-        .stderr(predicate::str::contains(
-            "the argument '--format <FORMAT>' cannot be used with '--name <NAME>'",
         ));
 }
 
@@ -319,5 +348,46 @@ fn quiet_conflicts_with() {
         .code(2)
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--name <NAME>'",
+        ));
+    utils::command::command()
+        .arg("-q")
+        .arg("-u")
+        .arg("#>-")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--quiet' cannot be used with '--bar-style <STRING>'",
+        ));
+    utils::command::command()
+        .arg("-q")
+        .arg("--spinner-style")
+        .arg(r"/|\- ")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--quiet' cannot be used with '--spinner-style <STRING>...'",
+        ));
+    utils::command::command()
+        .arg("-q")
+        .arg("--spinner-style")
+        .arg("▹▹▹▹▹")
+        .arg("▸▹▹▹▹")
+        .arg("▹▸▹▹▹")
+        .arg("▹▹▸▹▹")
+        .arg("▹▹▹▸▹")
+        .arg("▹▹▹▹▸")
+        .arg("▪▪▪▪▪")
+        .arg("--")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--quiet' cannot be used with '--spinner-style <STRING>...'",
         ));
 }

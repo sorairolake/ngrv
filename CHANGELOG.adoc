@@ -21,6 +21,7 @@ project adheres to https://semver.org/[Semantic Versioning].
 * Add demo animation ({pull-request-url}/5[#5])
 * Add `--quiet` option ({pull-request-url}/11[#11])
 * Add `--format` option ({pull-request-url}/12[#12])
+* Add `--no-spinner` option ({pull-request-url}/14[#14])
 
 == {project-url}/releases/tag/v0.1.0[0.1.0] - 2025-03-27
 

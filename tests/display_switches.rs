@@ -182,6 +182,41 @@ fn no_bytes_conflicts_with() {
 }
 
 #[test]
+fn no_spinner() {
+    utils::command::command()
+        .arg("--no-spinner")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .success()
+        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+}
+
+#[test]
+fn no_spinner_conflicts_with() {
+    utils::command::command()
+        .arg("--no-spinner")
+        .arg("-F")
+        .arg("{wide_bar}")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--no-spinner' cannot be used with '--format <FORMAT>'",
+        ));
+    utils::command::command()
+        .arg("--no-spinner")
+        .arg("-q")
+        .arg("assets/after-long-help.md")
+        .assert()
+        .failure()
+        .code(2)
+        .stderr(predicate::str::contains(
+            "the argument '--no-spinner' cannot be used with '--quiet'",
+        ));
+}
+
+#[test]
 fn format() {
     utils::command::command()
         .arg("-F")

@@ -71,6 +71,10 @@ pub struct Opt {
     #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_bytes: bool,
 
+    /// Hide the spinner.
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
+    pub no_spinner: bool,
+
     /// Set output format to <FORMAT>.
     #[arg(
         short('F'),

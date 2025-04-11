@@ -72,6 +72,10 @@ _FILE_::
 
   Hide the total amount of data transferred.
 
+*--no-spinner*::
+
+  Hide the spinner.
+
 *-F*, *--format* _FORMAT_::
 
   Set output format to _FORMAT_. For the format string which can be provided

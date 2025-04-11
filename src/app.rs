@@ -45,7 +45,9 @@ pub fn run() -> anyhow::Result<()> {
     if opt.name.is_some() {
         keys.push("{prefix:.bold}:");
     }
-    keys.push("{spinner:.green}");
+    if !opt.no_spinner {
+        keys.push("{spinner:.green}");
+    }
     if !opt.no_bytes {
         if opt.si {
             keys.push("{decimal_bytes}");

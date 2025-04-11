@@ -95,9 +95,10 @@ pub fn run() -> anyhow::Result<()> {
         if !opt.no_eta {
             keys.push("ETA {eta}");
         }
-        let template = keys.join(" ");
+        let template = opt.format.unwrap_or_else(|| keys.join(" "));
 
-        let style = ProgressStyle::with_template(&template)?;
+        let style = ProgressStyle::with_template(&template)
+            .context("could not set the template string for the progress bar")?;
         let pb = if opt.quiet {
             ProgressBar::hidden()
         } else {
@@ -131,9 +132,10 @@ pub fn run() -> anyhow::Result<()> {
         if !opt.no_eta && size.is_some() {
             keys.push("ETA {eta}");
         }
-        let template = keys.join(" ");
+        let template = opt.format.unwrap_or_else(|| keys.join(" "));
 
-        let style = ProgressStyle::with_template(&template)?;
+        let style = ProgressStyle::with_template(&template)
+            .context("could not set the template string for the progress bar")?;
         let pb = if opt.quiet {
             ProgressBar::hidden()
         } else {

@@ -44,11 +44,11 @@ pub struct Opt {
     /// explicitly given with '--size', the progress bar cannot indicate how
     /// close to completion the transfer is, so it will not be shown even if
     /// this option is not specified.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_progress: bool,
 
     /// Hide the elapsed time.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_timer: bool,
 
     /// Hide the remaining time.
@@ -57,29 +57,36 @@ pub struct Opt {
     /// size, how long it will be before completion. The remaining time is
     /// prefixed with "ETA". If the total data size cannot be determined, the
     /// remaining time will not be shown even if this option is not specified.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_eta: bool,
 
     /// Hide the speed of data transfer.
     ///
     /// If this option is not specified, The rate will be shown in square
     /// brackets "[]".
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_rate: bool,
 
     /// Hide the total amount of data transferred.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_bytes: bool,
+
+    /// Set output format to <FORMAT>.
+    #[arg(
+        short('F'),
+        long,
+        value_name("FORMAT"),
+        conflicts_with("quiet"),
+        conflicts_with("si"),
+        conflicts_with("name")
+    )]
+    pub format: Option<String>,
 
     /// Don't output any transfer information at all.
     #[arg(
         short,
         long,
-        conflicts_with("no_progress"),
-        conflicts_with("no_timer"),
-        conflicts_with("no_eta"),
-        conflicts_with("no_rate"),
-        conflicts_with("no_bytes"),
+        conflicts_with("si"),
         conflicts_with("size"),
         conflicts_with("interval"),
         conflicts_with("name")

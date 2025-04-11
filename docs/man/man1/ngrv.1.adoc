@@ -4,16 +4,17 @@
 
 = ngrv(1)
 // Specify in UTC.
-:docdate: 2025-04-10
+:docdate: 2025-04-11
 :revnumber: 0.1.0
 :doctype: manpage
 :mansource: ngrv {revnumber}
 :manmanual: General Commands Manual
 :rust-official-url: https://www.rust-lang.org/
+:indicatif-templates-url: https://docs.rs/indicatif/#templates
 :enwp-article-url: https://en.wikipedia.org/wiki
 :binary-prefix-url: {enwp-article-url}/Binary_prefix
 :metric-prefix-url: {enwp-article-url}/Metric_prefix
-:parsing-a-span-url: https://docs.rs/jiff/#parsing-a-span
+:jiff-parsing-a-span-url: https://docs.rs/jiff/#parsing-a-span
 :io-module-url: https://doc.rust-lang.org/std/io
 :buf-reader-new-url: {io-module-url}/struct.BufReader.html#method.new
 :buf-writer-new-url: {io-module-url}/struct.BufWriter.html#method.new
@@ -71,6 +72,11 @@ _FILE_::
 
   Hide the total amount of data transferred.
 
+*-F*, *--format* _FORMAT_::
+
+  Set output format to _FORMAT_. For the format string which can be provided
+  for _FORMAT_, see {indicatif-templates-url}.
+
 *-q*, *--quiet*::
 
   Don't output any transfer information at all.
@@ -90,7 +96,7 @@ _FILE_::
 *-i*, *--interval* _SEC_::
 
   Wait _SEC_ seconds between updates. For the interval which can be provided
-  for _SEC_, see {parsing-a-span-url}.
+  for _SEC_, see {jiff-parsing-a-span-url}.
 
 *-N*, *--name* _NAME_::
 

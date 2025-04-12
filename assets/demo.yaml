@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2025 Shun Sakai
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+settings:
+  width: 120
+  height: 30
+  title: ngrv demo
+
+instructions:
+  - !Marker Watch the progress of processing from files
+  - !Command
+    command: ngrv linux-6.14.tar.xz | unxz > linux-6.14.tar
+  - !Wait 1s
+  - !Command
+    command: ngrv -k -i 1s -N linux-6.14.tar linux-6.14.tar | zstd > linux-6.14.tar.zst
+  - !Wait 1s
+  - !Command
+    command: file linux-6.14.tar*
+  - !Wait 1s
+  - !Command
+    command: dua -A linux-6.14.tar*
+  - !Wait 3s
+  - !Clear
+
+  - !Marker Watch the progress of processing from standard input
+  - !Command
+    command: unxz -c git-2.49.0.tar.xz | bzip2 | ngrv > git-2.49.0.tar.bz2
+  - !Wait 1s
+  - !Command
+    command: file git-2.49.0.tar*
+  - !Wait 1s
+  - !Command
+    command: dua -A git-2.49.0.tar*
+  - !Wait 3s
+  - !Clear
+
+  - !Marker Watch the progress of processing from standard input with the total data size
+  - !Command
+    command: head -c 134217728 /dev/random | ngrv -s 128MiB | base64 | wc -c
+  - !Wait 3s

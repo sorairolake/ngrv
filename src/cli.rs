@@ -44,11 +44,16 @@ pub struct Opt {
     /// explicitly given with '--size', the progress bar cannot indicate how
     /// close to completion the transfer is, so it will not be shown even if
     /// this option is not specified.
-    #[arg(long)]
+    #[arg(
+        long,
+        conflicts_with("format"),
+        conflicts_with("quiet"),
+        conflicts_with("bar_style")
+    )]
     pub no_progress: bool,
 
     /// Hide the elapsed time.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_timer: bool,
 
     /// Hide the remaining time.
@@ -57,19 +62,51 @@ pub struct Opt {
     /// size, how long it will be before completion. The remaining time is
     /// prefixed with "ETA". If the total data size cannot be determined, the
     /// remaining time will not be shown even if this option is not specified.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_eta: bool,
 
     /// Hide the speed of data transfer.
     ///
     /// If this option is not specified, The rate will be shown in square
     /// brackets "[]".
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_rate: bool,
 
     /// Hide the total amount of data transferred.
-    #[arg(long)]
+    #[arg(long, conflicts_with("format"), conflicts_with("quiet"))]
     pub no_bytes: bool,
+
+    /// Hide the spinner.
+    #[arg(
+        long,
+        conflicts_with("format"),
+        conflicts_with("quiet"),
+        conflicts_with("spinner_style")
+    )]
+    pub no_spinner: bool,
+
+    /// Set output format to <FORMAT>.
+    #[arg(
+        short('F'),
+        long,
+        value_name("FORMAT"),
+        conflicts_with("quiet"),
+        conflicts_with("si")
+    )]
+    pub format: Option<String>,
+
+    /// Don't output any transfer information at all.
+    #[arg(
+        short,
+        long,
+        conflicts_with("si"),
+        conflicts_with("size"),
+        conflicts_with("interval"),
+        conflicts_with("name"),
+        conflicts_with("bar_style"),
+        conflicts_with("spinner_style")
+    )]
+    pub quiet: bool,
 
     /// Use binary prefixes rather than SI prefixes for the amount of data
     /// displayed in the progress.
@@ -90,6 +127,18 @@ pub struct Opt {
     /// Prefix the output information with <NAME>.
     #[arg(short('N'), long, value_name("NAME"))]
     pub name: Option<String>,
+
+    /// Set the progress characters to <STRING>.
+    #[arg(short('u'), long, value_name("STRING"))]
+    pub bar_style: Option<String>,
+
+    /// Set the tick character sequence or the tick string sequence for the
+    /// spinner to <STRING>.
+    ///
+    /// If this option takes multiple <STRING>, it sets the tick string
+    /// sequence, otherwise it sets the tick character sequence.
+    #[arg(long, num_args(1..), value_name("STRING"))]
+    pub spinner_style: Option<Vec<String>>,
 
     /// Use a transfer buffer size of <BYTES> bytes.
     ///

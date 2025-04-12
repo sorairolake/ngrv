@@ -14,6 +14,17 @@ All notable changes to this project will be documented in this file.
 The format is based on https://keepachangelog.com/[Keep a Changelog], and this
 project adheres to https://semver.org/[Semantic Versioning].
 
+== {compare-url}/v0.1.0\...v0.1.1[0.1.1] - 2025-04-12
+
+=== Added
+
+* Add demo animation ({pull-request-url}/5[#5])
+* Add `--quiet` option ({pull-request-url}/11[#11])
+* Add `--format` option ({pull-request-url}/12[#12])
+* Add `--no-spinner` option ({pull-request-url}/14[#14])
+* Add `--bar-style` option ({pull-request-url}/15[#15])
+* Add `--spinner-style` option ({pull-request-url}/15[#15])
+
 == {project-url}/releases/tag/v0.1.0[0.1.0] - 2025-03-27
 
 === Added

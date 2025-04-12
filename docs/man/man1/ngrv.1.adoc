@@ -5,7 +5,7 @@
 = ngrv(1)
 // Specify in UTC.
 :docdate: 2025-04-11
-:revnumber: 0.1.0
+:revnumber: 0.1.1
 :doctype: manpage
 :mansource: ngrv {revnumber}
 :manmanual: General Commands Manual

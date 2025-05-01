@@ -11,10 +11,10 @@ SPDX-License-Identifier: CC-BY-4.0
 ![MSRV][msrv-badge]
 ![License][license-badge]
 
-**ngrv** (*n*a*g*a*r*e *v*iewer, 流れビューアー) is a terminal-based tool for
-monitoring the progress of data through a pipeline written in [Rust]. It is
-inspired by [`pv(1)`] and can be used for similar purposes, but is not intended
-as a drop-in replacement for it.
+**ngrv** (**n**a**g**a**r**e **v**iewer, 流れビューアー) is a terminal-based
+tool for monitoring the progress of data through a pipeline written in [Rust].
+It is inspired by [`pv(1)`] and can be used for similar purposes, but is not
+intended as a drop-in replacement for it.
 
 ![Demo animation](assets/demo.gif)
 

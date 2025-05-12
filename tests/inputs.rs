@@ -9,34 +9,40 @@ use predicates::prelude::predicate;
 #[test]
 fn inputs() {
     utils::command::command()
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
     utils::command::command()
-        .arg("assets/after-long-help.md")
-        .arg("assets/long-version.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
+        .arg("data/LICENSES/CC-BY-4.0.txt")
         .assert()
         .success()
         .stdout(predicate::eq(concat!(
-            include_str!("assets/after-long-help.md"),
-            include_str!("assets/long-version.md")
+            include_str!("data/LICENSES/GPL-3.0-or-later.txt"),
+            include_str!("data/LICENSES/CC-BY-4.0.txt")
         )));
 }
 
 #[test]
 fn inputs_from_stdin() {
     utils::command::command()
-        .write_stdin(include_str!("assets/after-long-help.md"))
+        .write_stdin(include_str!("data/LICENSES/GPL-3.0-or-later.txt"))
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
     utils::command::command()
         .arg("-")
-        .write_stdin(include_str!("assets/after-long-help.md"))
+        .write_stdin(include_str!("data/LICENSES/GPL-3.0-or-later.txt"))
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -61,7 +67,7 @@ fn inputs_from_non_existent_files() {
     {
         let command = utils::command::command()
             .arg("non_existent.txt")
-            .arg("assets/long-version.md")
+            .arg("data/LICENSES/CC-BY-4.0.txt")
             .assert()
             .failure()
             .code(66)
@@ -78,7 +84,7 @@ fn inputs_from_non_existent_files() {
     }
     {
         let command = utils::command::command()
-            .arg("assets/after-long-help.md")
+            .arg("data/LICENSES/GPL-3.0-or-later.txt")
             .arg("non_existent.txt")
             .assert()
             .failure()

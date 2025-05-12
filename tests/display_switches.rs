@@ -10,10 +10,12 @@ use predicates::prelude::predicate;
 fn no_progress() {
     utils::command::command()
         .arg("--no-progress")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -22,7 +24,7 @@ fn no_progress_conflicts_with() {
         .arg("--no-progress")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -32,7 +34,7 @@ fn no_progress_conflicts_with() {
     utils::command::command()
         .arg("--no-progress")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -43,7 +45,7 @@ fn no_progress_conflicts_with() {
         .arg("--no-progress")
         .arg("-u")
         .arg("#>-")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -56,10 +58,12 @@ fn no_progress_conflicts_with() {
 fn no_timer() {
     utils::command::command()
         .arg("--no-timer")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -68,7 +72,7 @@ fn no_timer_conflicts_with() {
         .arg("--no-timer")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -78,7 +82,7 @@ fn no_timer_conflicts_with() {
     utils::command::command()
         .arg("--no-timer")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -91,10 +95,12 @@ fn no_timer_conflicts_with() {
 fn no_eta() {
     utils::command::command()
         .arg("--no-eta")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -103,7 +109,7 @@ fn no_eta_conflicts_with() {
         .arg("--no-eta")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -113,7 +119,7 @@ fn no_eta_conflicts_with() {
     utils::command::command()
         .arg("--no-eta")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -126,10 +132,12 @@ fn no_eta_conflicts_with() {
 fn no_rate() {
     utils::command::command()
         .arg("--no-rate")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -138,7 +146,7 @@ fn no_rate_conflicts_with() {
         .arg("--no-rate")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -148,7 +156,7 @@ fn no_rate_conflicts_with() {
     utils::command::command()
         .arg("--no-rate")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -161,10 +169,12 @@ fn no_rate_conflicts_with() {
 fn no_bytes() {
     utils::command::command()
         .arg("--no-bytes")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -173,7 +183,7 @@ fn no_bytes_conflicts_with() {
         .arg("--no-bytes")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -183,7 +193,7 @@ fn no_bytes_conflicts_with() {
     utils::command::command()
         .arg("--no-bytes")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -196,10 +206,12 @@ fn no_bytes_conflicts_with() {
 fn no_spinner() {
     utils::command::command()
         .arg("--no-spinner")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -208,7 +220,7 @@ fn no_spinner_conflicts_with() {
         .arg("--no-spinner")
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -218,7 +230,7 @@ fn no_spinner_conflicts_with() {
     utils::command::command()
         .arg("--no-spinner")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -230,7 +242,7 @@ fn no_spinner_conflicts_with() {
         .arg("--spinner-style")
         .arg(r"/|\- ")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -248,7 +260,7 @@ fn no_spinner_conflicts_with() {
         .arg("▹▹▹▹▸")
         .arg("▪▪▪▪▪")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -262,10 +274,12 @@ fn format() {
     utils::command::command()
         .arg("-F")
         .arg("{wide_bar}")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -274,7 +288,7 @@ fn format_conflicts_with() {
         .arg("-F")
         .arg("{wide_bar}")
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -285,7 +299,7 @@ fn format_conflicts_with() {
         .arg("-F")
         .arg("{wide_bar}")
         .arg("-k")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -298,10 +312,12 @@ fn format_conflicts_with() {
 fn quiet() {
     utils::command::command()
         .arg("-q")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -309,7 +325,7 @@ fn quiet_conflicts_with() {
     utils::command::command()
         .arg("-q")
         .arg("-k")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -320,7 +336,7 @@ fn quiet_conflicts_with() {
         .arg("-q")
         .arg("-s")
         .arg("128MiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -331,7 +347,7 @@ fn quiet_conflicts_with() {
         .arg("-q")
         .arg("-i")
         .arg("1s")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -342,7 +358,7 @@ fn quiet_conflicts_with() {
         .arg("-q")
         .arg("-N")
         .arg("foo")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -353,7 +369,7 @@ fn quiet_conflicts_with() {
         .arg("-q")
         .arg("-u")
         .arg("#>-")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -365,7 +381,7 @@ fn quiet_conflicts_with() {
         .arg("--spinner-style")
         .arg(r"/|\- ")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -383,7 +399,7 @@ fn quiet_conflicts_with() {
         .arg("▹▹▹▹▸")
         .arg("▪▪▪▪▪")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)

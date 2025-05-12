@@ -19,7 +19,7 @@ include = ["/LICENSES", "/README.md", "/src"]
 [dependencies]
 anyhow = "1.0.98"
 byte-unit = "5.1.6"
-clap = { version = "4.5.37", features = ["derive", "wrap_help"] }
+clap = { version = "4.5.38", features = ["derive", "wrap_help"] }
 clap_complete = "4.5.50"
 clap_complete_nushell = "4.5.5"
 indicatif = "0.17.11"

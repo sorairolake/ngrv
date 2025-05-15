@@ -64,13 +64,7 @@ pub struct Opt {
     pub no_spinner: bool,
 
     /// Set output format to <FORMAT>.
-    #[arg(
-        short('F'),
-        long,
-        value_name("FORMAT"),
-        conflicts_with("quiet"),
-        conflicts_with("si")
-    )]
+    #[arg(short('F'), long, conflicts_with("quiet"), conflicts_with("si"))]
     pub format: Option<String>,
 
     /// Don't output any transfer information at all.
@@ -95,7 +89,7 @@ pub struct Opt {
     ///
     /// <SIZE> can be suffixed with a symbol (B), which represents the byte. B
     /// can be prefixed with SI prefixes or binary prefixes.
-    #[arg(short, long, value_name("SIZE"))]
+    #[arg(short, long)]
     pub size: Option<Byte>,
 
     /// Wait <SEC> seconds between updates.
@@ -103,7 +97,7 @@ pub struct Opt {
     pub interval: Option<Span>,
 
     /// Prefix the output information with <NAME>.
-    #[arg(short('N'), long, value_name("NAME"))]
+    #[arg(short('N'), long)]
     pub name: Option<String>,
 
     /// Set the progress characters to <STRING>.

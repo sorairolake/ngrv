@@ -11,10 +11,12 @@ fn buffer_size() {
     utils::command::command()
         .arg("-B")
         .arg("128MiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -22,7 +24,7 @@ fn buffer_size_with_invalid_byte() {
     utils::command::command()
         .arg("-B")
         .arg("2048 A")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -30,7 +32,7 @@ fn buffer_size_with_invalid_byte() {
     utils::command::command()
         .arg("-B")
         .arg("2.00LiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -38,7 +40,7 @@ fn buffer_size_with_invalid_byte() {
     utils::command::command()
         .arg("-B")
         .arg("n B")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -48,7 +50,7 @@ fn buffer_size_with_invalid_byte() {
     utils::command::command()
         .arg("-B")
         .arg("n")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -58,7 +60,7 @@ fn buffer_size_with_invalid_byte() {
     utils::command::command()
         .arg("-B")
         .arg("nKiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)

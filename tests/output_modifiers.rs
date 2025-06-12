@@ -10,10 +10,12 @@ use predicates::prelude::predicate;
 fn si() {
     utils::command::command()
         .arg("-k")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -21,10 +23,12 @@ fn size() {
     utils::command::command()
         .arg("-s")
         .arg("128MiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -32,7 +36,7 @@ fn size_with_invalid_byte() {
     utils::command::command()
         .arg("-s")
         .arg("2048 A")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -40,7 +44,7 @@ fn size_with_invalid_byte() {
     utils::command::command()
         .arg("-s")
         .arg("2.00LiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -48,7 +52,7 @@ fn size_with_invalid_byte() {
     utils::command::command()
         .arg("-s")
         .arg("n B")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -58,7 +62,7 @@ fn size_with_invalid_byte() {
     utils::command::command()
         .arg("-s")
         .arg("n")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -68,7 +72,7 @@ fn size_with_invalid_byte() {
     utils::command::command()
         .arg("-s")
         .arg("nKiB")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -82,10 +86,12 @@ fn interval() {
     utils::command::command()
         .arg("-i")
         .arg("1s")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -93,7 +99,7 @@ fn interval_with_invalid_span() {
     utils::command::command()
         .arg("-i")
         .arg("NaN")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -103,7 +109,7 @@ fn interval_with_invalid_span() {
     utils::command::command()
         .arg("-i")
         .arg("1")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -113,7 +119,7 @@ fn interval_with_invalid_span() {
     utils::command::command()
         .arg("-i")
         .arg("1a")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -123,7 +129,7 @@ fn interval_with_invalid_span() {
     utils::command::command()
         .arg("-i")
         .arg("10000000000000y")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)
@@ -137,10 +143,12 @@ fn name() {
     utils::command::command()
         .arg("-N")
         .arg("foo")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -148,10 +156,12 @@ fn bar_style() {
     utils::command::command()
         .arg("-u")
         .arg("#>-")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -160,10 +170,12 @@ fn spinner_style() {
         .arg("--spinner-style")
         .arg(r"/|\- ")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
     utils::command::command()
         .arg("--spinner-style")
         .arg("▹▹▹▹▹")
@@ -174,10 +186,12 @@ fn spinner_style() {
         .arg("▹▹▹▹▸")
         .arg("▪▪▪▪▪")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
-        .stdout(predicate::eq(include_str!("assets/after-long-help.md")));
+        .stdout(predicate::eq(include_str!(
+            "data/LICENSES/GPL-3.0-or-later.txt"
+        )));
 }
 
 #[test]
@@ -185,7 +199,7 @@ fn spinner_style_without_value() {
     utils::command::command()
         .arg("--spinner-style")
         .arg("--")
-        .arg("assets/after-long-help.md")
+        .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .failure()
         .code(2)

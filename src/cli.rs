@@ -12,31 +12,9 @@ use clap::{CommandFactory, Parser, ValueEnum, ValueHint};
 use clap_complete::Generator;
 use jiff::Span;
 
-const LONG_VERSION: &str = concat!(
-    env!("CARGO_PKG_VERSION"),
-    '\n',
-    "Copyright (C) 2025 Shun Sakai\n",
-    '\n',
-    "This program is distributed under the terms of the GNU General Public License\n",
-    "v3.0 or later.\n",
-    '\n',
-    "This is free software: you are free to change and redistribute it. There is NO\n",
-    "WARRANTY, to the extent permitted by law.\n",
-    '\n',
-    "Report bugs to <https://github.com/sorairolake/ngrv/issues>."
-);
-
-const AFTER_LONG_HELP: &str = "See `ngrv(1)` for more details.";
-
 #[derive(Debug, Parser)]
 #[allow(clippy::struct_excessive_bools)]
-#[command(
-    version,
-    long_version(LONG_VERSION),
-    about,
-    max_term_width(100),
-    after_long_help(AFTER_LONG_HELP)
-)]
+#[command(version, about, max_term_width(100))]
 pub struct Opt {
     /// Hide the progress bar.
     ///
@@ -86,13 +64,7 @@ pub struct Opt {
     pub no_spinner: bool,
 
     /// Set output format to <FORMAT>.
-    #[arg(
-        short('F'),
-        long,
-        value_name("FORMAT"),
-        conflicts_with("quiet"),
-        conflicts_with("si")
-    )]
+    #[arg(short('F'), long, conflicts_with("quiet"), conflicts_with("si"))]
     pub format: Option<String>,
 
     /// Don't output any transfer information at all.
@@ -117,7 +89,7 @@ pub struct Opt {
     ///
     /// <SIZE> can be suffixed with a symbol (B), which represents the byte. B
     /// can be prefixed with SI prefixes or binary prefixes.
-    #[arg(short, long, value_name("SIZE"))]
+    #[arg(short, long)]
     pub size: Option<Byte>,
 
     /// Wait <SEC> seconds between updates.
@@ -125,7 +97,7 @@ pub struct Opt {
     pub interval: Option<Span>,
 
     /// Prefix the output information with <NAME>.
-    #[arg(short('N'), long, value_name("NAME"))]
+    #[arg(short('N'), long)]
     pub name: Option<String>,
 
     /// Set the progress characters to <STRING>.

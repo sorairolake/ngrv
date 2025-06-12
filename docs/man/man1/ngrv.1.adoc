@@ -4,8 +4,8 @@
 
 = ngrv(1)
 // Specify in UTC.
-:docdate: 2025-04-11
-:revnumber: 0.1.1
+:docdate: 2025-05-12
+:revnumber: 0.1.2
 :doctype: manpage
 :mansource: ngrv {revnumber}
 :manmanual: General Commands Manual
@@ -139,8 +139,7 @@ _FILE_::
 
 *-V*, *--version*::
 
-  Print version number. The long flag (*--version*) will also print the
-  copyright notice, the license notice and where to report bugs.
+  Print version number.
 
 *--generate-completion* _SHELL_::
 

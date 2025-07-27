@@ -40,6 +40,10 @@ clippy:
 clippy-fix:
     cargo clippy --fix --allow-dirty --allow-staged -- -D warnings
 
+# Build `ngrv(1)`
+build-man:
+    asciidoctor -b manpage docs/man/man1/ngrv.1.adoc
+
 # Run the linter for GitHub Actions workflow files
 lint-github-actions:
     actionlint -verbose

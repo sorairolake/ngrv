@@ -43,7 +43,7 @@ rust_2018_idioms = { level = "warn", priority = -1 }
 unsafe_code = "forbid"
 
 [profile.release]
-codegen-units = 1
+strip = true
 lto = true
 panic = "abort"
-strip = true
+codegen-units = 1

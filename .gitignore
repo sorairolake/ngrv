@@ -16,3 +16,7 @@ ngrv.1
 # Files generated when generating demo animation
 assets/*.cast
 assets/*.tar*
+
+# GoReleaser
+dist/
+.intentionally-empty-file.o

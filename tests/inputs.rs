@@ -6,16 +6,18 @@ mod utils;
 
 use predicates::prelude::predicate;
 
+use crate::utils::command;
+
 #[test]
 fn inputs() {
-    utils::command::command()
+    command::command()
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
         .success()
         .stdout(predicate::eq(include_str!(
             "data/LICENSES/GPL-3.0-or-later.txt"
         )));
-    utils::command::command()
+    command::command()
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .arg("data/LICENSES/CC-BY-4.0.txt")
         .assert()
@@ -28,14 +30,14 @@ fn inputs() {
 
 #[test]
 fn inputs_from_stdin() {
-    utils::command::command()
+    command::command()
         .write_stdin(include_str!("data/LICENSES/GPL-3.0-or-later.txt"))
         .assert()
         .success()
         .stdout(predicate::eq(include_str!(
             "data/LICENSES/GPL-3.0-or-later.txt"
         )));
-    utils::command::command()
+    command::command()
         .arg("-")
         .write_stdin(include_str!("data/LICENSES/GPL-3.0-or-later.txt"))
         .assert()
@@ -48,7 +50,7 @@ fn inputs_from_stdin() {
 #[test]
 fn inputs_from_non_existent_files() {
     {
-        let command = utils::command::command()
+        let command = command::command()
             .arg("non_existent.txt")
             .assert()
             .failure()
@@ -65,7 +67,7 @@ fn inputs_from_non_existent_files() {
         }
     }
     {
-        let command = utils::command::command()
+        let command = command::command()
             .arg("non_existent.txt")
             .arg("data/LICENSES/CC-BY-4.0.txt")
             .assert()
@@ -83,7 +85,7 @@ fn inputs_from_non_existent_files() {
         }
     }
     {
-        let command = utils::command::command()
+        let command = command::command()
             .arg("data/LICENSES/GPL-3.0-or-later.txt")
             .arg("non_existent.txt")
             .assert()

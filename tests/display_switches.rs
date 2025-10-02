@@ -6,9 +6,11 @@ mod utils;
 
 use predicates::prelude::predicate;
 
+use crate::utils::command;
+
 #[test]
 fn no_progress() {
-    utils::command::command()
+    command::command()
         .arg("--no-progress")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -20,7 +22,7 @@ fn no_progress() {
 
 #[test]
 fn no_progress_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-progress")
         .arg("-F")
         .arg("{wide_bar}")
@@ -31,7 +33,7 @@ fn no_progress_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-progress' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-progress")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -41,7 +43,7 @@ fn no_progress_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-progress' cannot be used with '--quiet'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-progress")
         .arg("-u")
         .arg("#>-")
@@ -56,7 +58,7 @@ fn no_progress_conflicts_with() {
 
 #[test]
 fn no_timer() {
-    utils::command::command()
+    command::command()
         .arg("--no-timer")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -68,7 +70,7 @@ fn no_timer() {
 
 #[test]
 fn no_timer_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-timer")
         .arg("-F")
         .arg("{wide_bar}")
@@ -79,7 +81,7 @@ fn no_timer_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-timer' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-timer")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -93,7 +95,7 @@ fn no_timer_conflicts_with() {
 
 #[test]
 fn no_eta() {
-    utils::command::command()
+    command::command()
         .arg("--no-eta")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -105,7 +107,7 @@ fn no_eta() {
 
 #[test]
 fn no_eta_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-eta")
         .arg("-F")
         .arg("{wide_bar}")
@@ -116,7 +118,7 @@ fn no_eta_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-eta' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-eta")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -130,7 +132,7 @@ fn no_eta_conflicts_with() {
 
 #[test]
 fn no_rate() {
-    utils::command::command()
+    command::command()
         .arg("--no-rate")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -142,7 +144,7 @@ fn no_rate() {
 
 #[test]
 fn no_rate_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-rate")
         .arg("-F")
         .arg("{wide_bar}")
@@ -153,7 +155,7 @@ fn no_rate_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-rate' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-rate")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -167,7 +169,7 @@ fn no_rate_conflicts_with() {
 
 #[test]
 fn no_bytes() {
-    utils::command::command()
+    command::command()
         .arg("--no-bytes")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -179,7 +181,7 @@ fn no_bytes() {
 
 #[test]
 fn no_bytes_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-bytes")
         .arg("-F")
         .arg("{wide_bar}")
@@ -190,7 +192,7 @@ fn no_bytes_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-bytes' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-bytes")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -204,7 +206,7 @@ fn no_bytes_conflicts_with() {
 
 #[test]
 fn no_spinner() {
-    utils::command::command()
+    command::command()
         .arg("--no-spinner")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -216,7 +218,7 @@ fn no_spinner() {
 
 #[test]
 fn no_spinner_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("--no-spinner")
         .arg("-F")
         .arg("{wide_bar}")
@@ -227,7 +229,7 @@ fn no_spinner_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-spinner' cannot be used with '--format <FORMAT>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-spinner")
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -237,7 +239,7 @@ fn no_spinner_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-spinner' cannot be used with '--quiet'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-spinner")
         .arg("--spinner-style")
         .arg(r"/|\- ")
@@ -249,7 +251,7 @@ fn no_spinner_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--no-spinner' cannot be used with '--spinner-style <STRING>...'",
         ));
-    utils::command::command()
+    command::command()
         .arg("--no-spinner")
         .arg("--spinner-style")
         .arg("▹▹▹▹▹")
@@ -271,7 +273,7 @@ fn no_spinner_conflicts_with() {
 
 #[test]
 fn format() {
-    utils::command::command()
+    command::command()
         .arg("-F")
         .arg("{wide_bar}")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -284,7 +286,7 @@ fn format() {
 
 #[test]
 fn format_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("-F")
         .arg("{wide_bar}")
         .arg("-q")
@@ -295,7 +297,7 @@ fn format_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--format <FORMAT>' cannot be used with '--quiet'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-F")
         .arg("{wide_bar}")
         .arg("-k")
@@ -310,7 +312,7 @@ fn format_conflicts_with() {
 
 #[test]
 fn quiet() {
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -322,7 +324,7 @@ fn quiet() {
 
 #[test]
 fn quiet_conflicts_with() {
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("-k")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -332,7 +334,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--si'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("-s")
         .arg("128MiB")
@@ -343,7 +345,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--size <SIZE>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("-i")
         .arg("1s")
@@ -354,7 +356,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--interval <SEC>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("-N")
         .arg("foo")
@@ -365,7 +367,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--name <NAME>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("-u")
         .arg("#>-")
@@ -376,7 +378,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--bar-style <STRING>'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("--spinner-style")
         .arg(r"/|\- ")
@@ -388,7 +390,7 @@ fn quiet_conflicts_with() {
         .stderr(predicate::str::contains(
             "the argument '--quiet' cannot be used with '--spinner-style <STRING>...'",
         ));
-    utils::command::command()
+    command::command()
         .arg("-q")
         .arg("--spinner-style")
         .arg("▹▹▹▹▹")

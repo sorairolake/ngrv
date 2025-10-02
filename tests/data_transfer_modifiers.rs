@@ -6,9 +6,11 @@ mod utils;
 
 use predicates::prelude::predicate;
 
+use crate::utils::command;
+
 #[test]
 fn buffer_size() {
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("128MiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -21,7 +23,7 @@ fn buffer_size() {
 
 #[test]
 fn buffer_size_with_invalid_byte() {
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("2048 A")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -29,7 +31,7 @@ fn buffer_size_with_invalid_byte() {
         .failure()
         .code(2)
         .stderr(predicate::str::contains("the character 'A' is incorrect"));
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("2.00LiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -37,7 +39,7 @@ fn buffer_size_with_invalid_byte() {
         .failure()
         .code(2)
         .stderr(predicate::str::contains("the character 'L' is incorrect"));
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("n B")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -47,7 +49,7 @@ fn buffer_size_with_invalid_byte() {
         .stderr(predicate::str::contains(
             "the character 'n' is not a number",
         ));
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("n")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -57,7 +59,7 @@ fn buffer_size_with_invalid_byte() {
         .stderr(predicate::str::contains(
             "the character 'n' is not a number",
         ));
-    utils::command::command()
+    command::command()
         .arg("-B")
         .arg("nKiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")

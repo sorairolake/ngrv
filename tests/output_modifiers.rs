@@ -6,9 +6,11 @@ mod utils;
 
 use predicates::prelude::predicate;
 
+use crate::utils::command;
+
 #[test]
 fn si() {
-    utils::command::command()
+    command::command()
         .arg("-k")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
         .assert()
@@ -20,7 +22,7 @@ fn si() {
 
 #[test]
 fn size() {
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("128MiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -33,7 +35,7 @@ fn size() {
 
 #[test]
 fn size_with_invalid_byte() {
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("2048 A")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -41,7 +43,7 @@ fn size_with_invalid_byte() {
         .failure()
         .code(2)
         .stderr(predicate::str::contains("the character 'A' is incorrect"));
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("2.00LiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -49,7 +51,7 @@ fn size_with_invalid_byte() {
         .failure()
         .code(2)
         .stderr(predicate::str::contains("the character 'L' is incorrect"));
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("n B")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -59,7 +61,7 @@ fn size_with_invalid_byte() {
         .stderr(predicate::str::contains(
             "the character 'n' is not a number",
         ));
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("n")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -69,7 +71,7 @@ fn size_with_invalid_byte() {
         .stderr(predicate::str::contains(
             "the character 'n' is not a number",
         ));
-    utils::command::command()
+    command::command()
         .arg("-s")
         .arg("nKiB")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -83,7 +85,7 @@ fn size_with_invalid_byte() {
 
 #[test]
 fn interval() {
-    utils::command::command()
+    command::command()
         .arg("-i")
         .arg("1s")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -96,7 +98,7 @@ fn interval() {
 
 #[test]
 fn interval_with_invalid_span() {
-    utils::command::command()
+    command::command()
         .arg("-i")
         .arg("NaN")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -106,7 +108,7 @@ fn interval_with_invalid_span() {
         .stderr(predicate::str::contains(
             r#"failed to parse "NaN" in the "friendly" format"#,
         ));
-    utils::command::command()
+    command::command()
         .arg("-i")
         .arg("1")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -116,7 +118,7 @@ fn interval_with_invalid_span() {
         .stderr(predicate::str::contains(
             r#"failed to parse "1" in the "friendly" format"#,
         ));
-    utils::command::command()
+    command::command()
         .arg("-i")
         .arg("1a")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -126,7 +128,7 @@ fn interval_with_invalid_span() {
         .stderr(predicate::str::contains(
             r#"failed to parse "1a" in the "friendly" format"#,
         ));
-    utils::command::command()
+    command::command()
         .arg("-i")
         .arg("10000000000000y")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -140,7 +142,7 @@ fn interval_with_invalid_span() {
 
 #[test]
 fn name() {
-    utils::command::command()
+    command::command()
         .arg("-N")
         .arg("foo")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -153,7 +155,7 @@ fn name() {
 
 #[test]
 fn bar_style() {
-    utils::command::command()
+    command::command()
         .arg("-u")
         .arg("#>-")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")
@@ -166,7 +168,7 @@ fn bar_style() {
 
 #[test]
 fn spinner_style() {
-    utils::command::command()
+    command::command()
         .arg("--spinner-style")
         .arg(r"/|\- ")
         .arg("--")
@@ -176,7 +178,7 @@ fn spinner_style() {
         .stdout(predicate::eq(include_str!(
             "data/LICENSES/GPL-3.0-or-later.txt"
         )));
-    utils::command::command()
+    command::command()
         .arg("--spinner-style")
         .arg("▹▹▹▹▹")
         .arg("▸▹▹▹▹")
@@ -196,7 +198,7 @@ fn spinner_style() {
 
 #[test]
 fn spinner_style_without_value() {
-    utils::command::command()
+    command::command()
         .arg("--spinner-style")
         .arg("--")
         .arg("data/LICENSES/GPL-3.0-or-later.txt")

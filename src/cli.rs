@@ -128,8 +128,8 @@ pub struct Opt {
     ///
     /// If [FILE] is not specified, or if "-" is specified, data will be read
     /// from standard input.
-    #[arg(value_name("FILE"), value_hint(ValueHint::FilePath))]
-    pub inputs: Option<Vec<PathBuf>>,
+    #[arg(value_hint(ValueHint::FilePath))]
+    pub file: Option<Vec<PathBuf>>,
 }
 
 impl Opt {

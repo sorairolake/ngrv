@@ -36,7 +36,7 @@ pub fn run() -> anyhow::Result<()> {
         .transpose()
         .context("the buffer size is outside the range of valid values")?;
     let inputs = opt
-        .inputs
+        .file
         .filter(|paths| paths.iter().all(|path| path.as_os_str() != "-"));
 
     // The order is based on

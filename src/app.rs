@@ -15,7 +15,7 @@ use indicatif::{ProgressBar, ProgressFinish, ProgressStyle};
 use crate::cli::Opt;
 
 /// Runs the program and returns the result.
-#[allow(clippy::cognitive_complexity, clippy::too_many_lines)]
+#[expect(clippy::cognitive_complexity, clippy::too_many_lines)]
 pub fn run() -> anyhow::Result<()> {
     let opt = Opt::parse();
 

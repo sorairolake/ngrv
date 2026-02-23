@@ -15,7 +15,7 @@ categories = ["command-line-utilities"]
 include = ["/LICENSES", "/README.md", "/src"]
 
 [dependencies]
-anyhow = "1.0.101"
+anyhow = "1.0.102"
 byte-unit = "5.2.0"
 clap = { version = "4.5.59", features = ["derive", "wrap_help"] }
 clap_complete = "4.5.66"

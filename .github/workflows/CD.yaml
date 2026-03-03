@@ -125,7 +125,7 @@ jobs:
           fi
           rm -rv ngrv-*/
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: "ngrv-${{ needs.get-version.outputs.version }}-${{ matrix.target }}"
           path: "ngrv-*-*"

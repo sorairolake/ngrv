@@ -18,7 +18,7 @@ include = ["/LICENSES", "/README.md", "/src"]
 anyhow = "1.0.102"
 byte-unit = "5.2.0"
 clap = { version = "4.5.60", features = ["derive", "wrap_help"] }
-clap_complete = "4.5.66"
+clap_complete = "4.6.0"
 clap_complete_nushell = "4.5.10"
 indicatif = "0.18.4"
 jiff = { version = "0.2.23", default-features = false, features = ["std"] }

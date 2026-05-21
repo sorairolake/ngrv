@@ -112,6 +112,13 @@ pub struct Opt {
     #[arg(long, num_args(1..), value_name("STRING"))]
     pub spinner_style: Option<Vec<String>>,
 
+    /// Show a scrolling historical throughput graph (requires a TTY).
+    ///
+    /// Displays a braille line chart of bytes per second, scrolling right to
+    /// left, similar to btop. Requires the terminal to support raw mode.
+    #[arg(long, conflicts_with("quiet"), conflicts_with("format"))]
+    pub graph: bool,
+
     /// Use a transfer buffer size of <BYTES> bytes.
     ///
     /// The same suffixes as '--size' can be used.

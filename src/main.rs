@@ -4,6 +4,7 @@
 
 mod app;
 mod cli;
+mod graph;
 
 use std::{io, process::ExitCode};
 

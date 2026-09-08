@@ -66,6 +66,23 @@ pub fn run() -> anyhow::Result<()> {
         }
     }
 
+    if opt.graph {
+        return crate::graph::run(crate::graph::GraphArgs {
+            keys,
+            size,
+            interval,
+            buffer_size,
+            inputs,
+            no_progress: opt.no_progress,
+            no_eta: opt.no_eta,
+            bar_style: opt.bar_style,
+            spinner_style: opt.spinner_style,
+            format: opt.format,
+            name: opt.name,
+            si: opt.si,
+        });
+    }
+
     let stdout = io::stdout().lock();
     let writer = if let Some(buffer_size) = buffer_size {
         BufWriter::with_capacity(buffer_size, stdout)

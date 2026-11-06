@@ -181,7 +181,7 @@ pub fn run() -> anyhow::Result<()> {
         let mut reader = if let Some(buffer_size) = buffer_size {
             BufReader::with_capacity(buffer_size, stdin)
         } else {
-            BufReader::new(stdin)
+            stdin
         };
 
         io::copy(&mut reader, &mut writer)

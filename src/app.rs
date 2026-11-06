@@ -177,13 +177,8 @@ pub fn run() -> anyhow::Result<()> {
         };
         let mut writer = pb.wrap_write(writer);
 
-        let stdin = io::stdin().lock();
-        let mut reader = if let Some(buffer_size) = buffer_size {
-            BufReader::with_capacity(buffer_size, stdin)
-        } else {
-            #[allow(clippy::bufreader_stdin)]
-            BufReader::new(stdin)
-        };
+        let stdin = io::stdin();
+        let mut reader = stdin.lock();
 
         io::copy(&mut reader, &mut writer)
             .context("could not copy the contents of standard input to standard output")?;

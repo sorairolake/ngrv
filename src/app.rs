@@ -181,6 +181,7 @@ pub fn run() -> anyhow::Result<()> {
         let mut reader = if let Some(buffer_size) = buffer_size {
             BufReader::with_capacity(buffer_size, stdin)
         } else {
+            #[allow(clippy::bufreader_stdin)]
             BufReader::new(stdin)
         };
 
